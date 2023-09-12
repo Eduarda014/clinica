@@ -2,6 +2,7 @@
     $this->layout('base', $data);
 
     use Source\Models\User;
+    use Source\Models\Login;
 
     $msg = $data['msg'];
 
@@ -19,7 +20,7 @@
         $cpf = $_POST['cpf'];
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-        $crm = $_POST['crm'];
+        $celular = $_POST['celular'];
         $tipo = '1';
         $convenio = $_POST['convenio'];
         $conv_numero = $_POST['conv_numero'];
@@ -39,7 +40,7 @@
         $user->email = $email;
         $user->senha = password_hash($senha,CONF_PASSWD_ALGO, CONF_PASSWD_OPTION);
 
-        $user->crm = $crm;
+        $user->celular = $celular;
         $user->tipo = $tipo;
         $user->convenio = $convenio;
         $user->conv_numero = $conv_numero;
@@ -51,6 +52,14 @@
 
         if(!empty($userId)){
             $msg = "Cadastro realizado com sucesso!";
+            
+            $objLogin = new Login();
+            $list = $objLogin->logar($email, $senha);
+
+            if($list == "ok"){
+                $msg = "Login realizado com sucesso";
+                header('Location:home');
+            }
         }
         else{
             $msg = "Erro ao cadastrar usuário, tente novamente.";
@@ -193,9 +202,9 @@
                             <br>
                             <div class="bairroNumero" style="display: flex; justify-content: space-between;">
                                 <div class="form-outline half-box" style="width: 33%;">
-                                    <label class="form-label" for="crm">CRM</label>
-                                    <input type="text" id="lastname" class="form-control" name="crm"
-                                        placeholder="Digite seu CRM" data-required data-only-letters
+                                    <label class="form-label" for="celular">Celular</label>
+                                    <input type="text" id="lastname" class="form-control" name="celular"
+                                        placeholder="Digite seu celular" data-required data-only-letters
                                         onfocusout="verificarCampo('lastname')" required />
                                 </div>
                                 <div class="form-outline half-box" style="width: 33%;">
