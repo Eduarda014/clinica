@@ -11,7 +11,7 @@ $objRouter->namespace("Source\Controllers");
 //Rotas Login
 $objRouter->get("/", "Web:login");
 $objRouter->post("/", "Web:login");
-$objRouter->get("/sair", "App:logout");
+$objRouter->get("/sair", "App:logout");                                                      
 
 //Rotas Home
 $objRouter->get("/home", "App:home");
@@ -28,6 +28,14 @@ $objRouter->post("/agenda", "App:schedule");
 //Rotas Esqueci Senha
 $objRouter->get("/esqueci-senha", "Web:forget");
 $objRouter->post("/esqueci-senha", "Web:forget");
+
+
+$objRouter->get("/agenda/{data}", "App:schedule");
+$objRouter->post("/deleta-agendamento/{id}", "App:delete_schedule");
+$objRouter->get("/deleta-agendamento/{id}", "App:delete_schedule");
+$objRouter->get("/register-agendamento/{data}/{hora}", "App:register_schedule");
+$objRouter->post("/register-agendamento", "App:register_schedule");
+$objRouter->get("/busca-usuarios/{chave}", "App:search_users");
 
 //Rotas Erro
 $objRouter->get("/error", "Web:error");

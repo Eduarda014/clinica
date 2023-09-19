@@ -2,8 +2,6 @@
 
 namespace Source\Core;
 
-use Source\Support\Message;
-
 class Session
 {
     public function __construct()
@@ -19,11 +17,6 @@ class Session
             return $_SESSION[$name];
         }
         return null;
-    }
-
-    public function has($name)
-    {   
-        return isset($_SESSION[$name]);
     }
 
     public function isset(string $key)
@@ -48,4 +41,11 @@ class Session
         session_destroy();
         return $this;
     }
+
+    public function has(string $key): bool
+    {
+        return isset($_SESSION[$key]);
+    }
+
+
 }

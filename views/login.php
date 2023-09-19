@@ -3,8 +3,6 @@
 
     use Source\Models\Login;
 
-    $msg = $data['msg']; 
-
     if(isset($_POST['btn']) && empty($msg)){
 
         $email = $_POST['email'];
